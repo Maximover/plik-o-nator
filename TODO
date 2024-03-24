@@ -1,0 +1,19 @@
+role ?
+
+sprawdzanie czy użytkownik jest tylko na jednym urządzeniu
+
+drag-n-drop plików
+
+opcja samego usuwania się pliku po jakimś czasie
+
+animacja ładowania w sass   X
+
+podgląd zuploadowanych plików txt, zdjęć i filmików
+
+
+paleta:
+    black #000000
+    dark-gray #363946
+    dim-gray #696773
+    cadet-gray #819595
+    yellow #F7B801

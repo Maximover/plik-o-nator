@@ -1,0 +1,46 @@
+@keyframes pulse {
+    0% {
+      background: rgb(73, 153, 80);
+      transform: scale(1);
+    }
+    50% {
+      background: darken(rgb(73, 153, 80), 10%);
+      transform: scale(1.015);
+    }
+    100% {
+      background: rgb(73, 153, 80);
+      transform: scale(1);
+    }
+}
+.size-app-logo {
+  height: 40px; 
+  width: 35px;
+}
+.server-rack {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid $rack-color 2px;
+    border-radius: 8px;
+    float: left;
+    margin: 5px;
+    padding: 2px;
+}
+.server-shelf {
+    display: flex;
+    align-items: center;
+    padding-left: 25%;
+    background-color: $rack-color;
+    border-radius: 5px;
+    height: 30%;
+    width: 100%;
+    margin: 2px;
+}
+.server-decoration {
+    animation: 1s infinite pulse ;
+    background-color: $onyx-gray;
+    border-radius: 100%;
+    height: 60%;
+    width: 25%;
+}

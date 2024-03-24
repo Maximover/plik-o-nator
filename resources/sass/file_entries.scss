@@ -1,0 +1,76 @@
+@keyframes download-highlight-hover {
+    0% { 
+        transform: scale(1); 
+        opacity: 0.8;
+    }
+    50% { 
+        transform: scale(1.5);
+        opacity: 1;
+    }
+    100% { 
+        transform: scale(1); 
+        opacity: 0.8;
+    }
+}
+@keyframes upload-file-hover {
+    // 0% {
+    //     background: linear-gradient(45deg, darken($body-bg, 8%), lighten($body-bg, 8%) 0%);
+    // }
+    // 25% {
+    //     background: linear-gradient(45deg, darken($body-bg, 8%), lighten($body-bg, 8%) 30%);   
+    // }
+    // 50% {
+    //     background: linear-gradient(45deg, darken($body-bg, 8%), lighten($body-bg, 8%) 50%);   
+    // }
+    // 75% {
+    //     background: linear-gradient(45deg, darken($body-bg, 8%), lighten($body-bg, 8%) 70%);   
+    // }
+    // 100% {
+    //     background: linear-gradient(45deg, darken($body-bg, 8%), lighten($body-bg, 8%) 100%);   
+    // }
+    0%{ width: 0%;}
+    100%{width: 80%;}
+}
+.file-entry {
+    border: solid $dim-gray 1px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8vh;
+    color:white;
+    border-radius: 10px;
+    width: 80%;
+    background-color: darken($body-bg, 2%);
+    padding: 10px 20px 10px 20px;
+    margin: 2vh;
+}
+.new-file-entry {
+    @extend .file-entry;
+    position: relative;
+    justify-content: center;
+    z-index: 99;
+    background-color: transparent;
+}
+.new-file-entry-bg {
+    position: absolute;
+    width: 80%;
+    height: 8vh;
+    top:0;
+    margin: 2vh;
+    border-radius: 10px;
+    background-color: darken($body-bg, 8%);
+}
+.new-file-entry:hover {
+    cursor: pointer;
+}
+.new-file-entry-bg:hover {
+    animation: 1s linear infinite upload-file-hover;
+}
+.download-icon {
+    width: 3vh;
+    height: 3vh;
+    opacity: 0.8;
+}
+.download-icon:hover {
+    animation: 0.5s linear 1 download-highlight-hover;
+}

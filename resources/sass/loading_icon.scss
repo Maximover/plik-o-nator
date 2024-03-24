@@ -1,0 +1,71 @@
+@keyframes circle-around {
+    0% {
+        transform: rotate(0deg) translate(-50px) rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg) translate(-50px) rotate(-360deg);
+    }
+}
+@keyframes appear {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+.slide-in{
+    animation: slide-in 0.5s forwards;
+}
+.slide-out{
+    animation: slide-out 0.5s forwards;
+}
+.size-loading {
+    height: 85px; 
+    width: 65px;
+}
+.loading-icon {
+    animation: 2s ease-in 1 appear;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 120px;
+}
+.file {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+    height: 24px;
+    width: 25px;
+    padding: 0px 2px 2px 2px;
+    background-color: white;
+    border-radius: 4px;
+}
+.circling-file{
+    @extend .file;
+    animation: 3s infinite circle-around linear;
+    position: relative;
+    bottom: 90px;
+}
+.file-base {
+    width:100%;
+    height:70%;
+    background-color: $file-color;
+    border-radius: 4px 0px 5px 5px;
+}
+.file-section { 
+    position: relative;
+    top:3px;
+    width:60%;
+    height:30%;
+    background-color: $file-color;
+    border-radius: 4px 4px 0px 0px;
+}
+
+// Loop through 3 circling files.
+@for $i from 1 through 3 {
+    .circling-file {
+        &:nth-child(#{$i}) {
+            // Delay the animation. Delay increases as items loop.
+            animation-delay: $i * calc(1s / 6);
+        }
+    }
+}

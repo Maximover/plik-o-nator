@@ -1,0 +1,60 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+@import 'app_icon.scss';
+
+@import 'loading_icon.scss';
+
+@import 'file_entries.scss';
+
+@keyframes slide-in {
+  100% { transform: translateX(0%); }
+}
+@keyframes slide-out {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+@keyframes expand {
+  0% { }
+  100% { }
+}
+
+.navbar {
+  background-color: $black;
+}
+.navbar-brand {
+  color: $yellow;
+}
+.dropdown-item {
+  @extend .dropdown-item;
+  color: $yellow;
+}
+.btn-dark {
+  @extend .btn-dark;
+  background-color: $black;
+}
+.identity-card {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  background-color: darken($body-bg, 2%);
+  border: solid $dim-gray 1px;
+  border-radius: 10px;
+  text-align: center;
+}
+.text-darkened {
+  color: $dim-gray;
+}
+.form {
+  color: white;
+}
+.form-field {
+
+}
+
