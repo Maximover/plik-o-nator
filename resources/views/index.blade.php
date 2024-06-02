@@ -20,6 +20,7 @@
         <script>
             const DOWNLOAD_ICON_IMAGE = "{{ asset('img/download-light.png') }}";
             const DELETE_ICON_IMAGE = "{{ asset('img/remove.png') }}";
+            const FILE_ICON_IMAGE = "{{ asset('img/file.png') }}";
         </script>    
     </head>
     <body class="antialiased">
