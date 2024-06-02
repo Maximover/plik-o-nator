@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('caption');
             $table->string('path');
             $table->string('original_name');
+            $table->string('mime_type');
             $table->timestamps();
         });
     }

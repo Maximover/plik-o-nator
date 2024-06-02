@@ -5,18 +5,20 @@ import axios from "axios";
 import AppIcon from "./AppIcon";
 
 const NavigationBar = () => {
-    const [context, ] = useContext(AppContext);
+    const [context, setContext] = useContext(AppContext);
     const [nav_state, setNavState] = useState('disabled');
     const navigate = useNavigate();
+
     const logoutFormSubmit = (ev) => {
         ev.preventDefault();
         axios.post(`${window.location.origin}/api/user/quit`, {}).then(()=>{
             window.location = '/';
+            setContext({...context, 'user_id': -1, 'user': '', 'role': ''})
         });
     }
     // upate nav according to user cookie
     useEffect(() => {
-        if (context.user == '') {
+        if (context.user === '') {
             setNavState('disabled');
             navigate('/');
         } else {
@@ -46,12 +48,15 @@ const NavigationBar = () => {
                         <li className='nav-item'>
                             <Link className={'nav-link '+nav_state} to="/downloads">Pobrane</Link>
                         </li>
+                        {context.role === 'administrator' ? <li className='nav-item'>
+                            <Link className={'nav-link '+nav_state} to="/users">Użytkownicy</Link>
+                        </li> : <></>}
                     </ul>
 
                     {/* <!-- Right Side Of Navbar --> */}
                     <ul className="navbar-nav ms-auto">
                         {/* <!-- Authentication Links --> */}
-                        {context.user ?
+                        {context.user !== '' ?
                             <li className="nav-item dropdown">
                                 <a id="navbarDropdown" className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre="true">
                                     {context.user}

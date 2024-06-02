@@ -13,6 +13,15 @@ class UploadedFile extends Model
         'user_id',
         'caption',
         'path',
-        'original_name'
+        'original_name',
+        'mime_type'
     ];
+
+    public function downloads() {
+        return $this->hasMany(Download::class);
+    }
+
+    public function getFileExtension() {
+        return last(explode('.', $this->original_name));
+    }
 }

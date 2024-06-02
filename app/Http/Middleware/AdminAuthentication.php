@@ -2,10 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class HttpAuthentication
+class AdminAuthentication
 {
     /**
      * Handle an incoming request.
@@ -16,10 +18,9 @@ class HttpAuthentication
      */
     public function handle(Request $request, Closure $next)
     {
-        // proceed
-        if ($request->cookie('user') !== null)
+        if (Auth::user()->role === User::$ROLE_ADMIN) {
             return $next($request);
-        // abort
+        }
         return response()->json(['error'=>'Not Authorized'], 401);
     }
 }

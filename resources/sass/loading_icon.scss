@@ -10,6 +10,14 @@
     0% { opacity: 0; }
     100% { opacity: 1; }
 }
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+} 
 .slide-in{
     animation: slide-in 0.5s forwards;
 }
@@ -59,7 +67,6 @@
     background-color: $file-color;
     border-radius: 4px 4px 0px 0px;
 }
-
 // Loop through 3 circling files.
 @for $i from 1 through 3 {
     .circling-file {
@@ -68,4 +75,15 @@
             animation-delay: $i * calc(1s / 6);
         }
     }
+}
+
+.loader-small {
+    width: 16px;
+    height: 16px;
+    border: 3px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
 }

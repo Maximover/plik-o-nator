@@ -12,13 +12,17 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public static $ROLE_USER = 'user';
+    public static $ROLE_ADMIN = 'administrator';
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name'
+        'name',
+        'password',
+        'role'
     ];
 
     /**
@@ -27,7 +31,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
+        'password',
         'remember_token',
     ];
+
+    public function uploadedFiles() {
+        return $this->hasMany(UploadedFile::class);
+    }
+
+    public function downloads() {
+        return $this->hasMany(Download::class);
+    }
 
 }

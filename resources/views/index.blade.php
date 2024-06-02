@@ -18,8 +18,8 @@
 
         @vite(['resources/js/app.js', 'resources/sass/app.scss'])
         <script>
-            const user = '{{Cookie::get("user")}}';
-            const DOWNLOAD_ICON_IMAGE = "{{ asset('img/download-light.png')}}";
+            const DOWNLOAD_ICON_IMAGE = "{{ asset('img/download-light.png') }}";
+            const DELETE_ICON_IMAGE = "{{ asset('img/remove.png') }}";
         </script>    
     </head>
     <body class="antialiased">

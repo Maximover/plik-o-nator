@@ -9,13 +9,14 @@ import ProtectedRoute from './util/ProtectedRoute';
 import Downloads from './pages/Downloads';
 import Alert from './elements/Alert';
 import { Toast } from 'bootstrap';
+import Users from './pages/Users';
 
 export const AppContext = createContext({});
 
 function Main() {
     const [alert_config, setAlertConfig] = useState({'message':'', 'type':''});
     const [context, setContext] = useState({
-        'user': user, 
+        'user': '', 
         'setAlertConfig': setAlertConfig
     });
 
@@ -36,6 +37,7 @@ function Main() {
                         <Route path="/" element={<Identity/>} />
                         <Route path="/files" element={<ProtectedRoute><Files/></ProtectedRoute>} />
                         <Route path="/downloads" element={<ProtectedRoute><Downloads/></ProtectedRoute>} />
+                        <Route path="/users" element={<ProtectedRoute><Users/></ProtectedRoute>} />
                     </Route>
                 </Routes>
             </BrowserRouter>

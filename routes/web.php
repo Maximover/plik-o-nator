@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\UploadedFileController;
 use App\Http\Controllers\UserController;
-use App\Http\Middleware\HttpAuthentication;
+use App\Http\Middleware\AdminAuthentication;
+use App\Http\Middleware\UserAuthentication;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,10 +20,15 @@ use Illuminate\Support\Facades\Route;
 Route::view('/{path?}', 'index');
 
 Route::post('/api/user/verify', [UserController::class, 'verify']);
-Route::post('/api/user/new', [UserController::class, 'new']);
+Route::post('/api/user/login', [UserController::class, 'login']);
 
-Route::middleware(HttpAuthentication::class)->group(function () {
+Route::middleware(UserAuthentication::class)->group(function () {
     Route::resource('/api/uploaded_files', UploadedFileController::class);
-    Route::post('/api/uploaded_files/download', [UploadedFileController::class, 'download']);
-    Route::post('/api/user/quit', [UserController::class, 'quit']);
+    Route::get('/api/uploaded_files/download/{id}', [UploadedFileController::class, 'download']);
+    Route::post('/api/user/quit', [UserController::class, 'logout']);
 });
+Route::middleware(AdminAuthentication::class)->group(function () {
+    Route::post('/api/user/new', [UserController::class, 'new']);
+    Route::get('/api/users', [UserController::class, 'index']);
+});
+
