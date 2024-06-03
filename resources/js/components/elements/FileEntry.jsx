@@ -9,7 +9,7 @@ const FileEntry = (props) => {
     const entry = useRef(null);
     const preview_loader = useRef(null);
     const el = props.entry;
-    let created_at = new Date(el.created_at).toLocaleString('PL-pl', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
+    let created_at = new Date(el.created_at).toLocaleString('PL-pl', {day:'2-digit', month:'2-digit', year:'numeric'});
     let extension = el.original_name.split(".").slice(-1)[0];
 
     const handleDelete = (ev) => {
@@ -31,6 +31,7 @@ const FileEntry = (props) => {
     }
 
     const entryClick = () => {
+        if (el.id === -1) return;
         setExpanded(!expanded);
         entry.current.classList.toggle('enlarged-entry');
     }
@@ -38,36 +39,41 @@ const FileEntry = (props) => {
     return (
         <div className="file-entry" ref={entry} onClick={entryClick}>
             <div className="d-flex justify-content-between w-100">
-                <div className="d-flex gap-2">
+                <div className="d-flex gap-2 text-small">
                     <div className="file-icon"><span>{extension}</span></div>
-                    <span className={el.id === -1 ? 'text-nowrap text-darkened' : 'text-nowrap'}>
-                        {el.caption}
-                    </span>
-                    {el.id === -1 ? <></> : <span className="text-darkened text-nowrap">{el.downloads_count} pobrań</span>}
+                    <div className="d-flex flex-column">
+                        <span className={el.id === -1 ? 'text-nowrap text-darkened' : 'text-nowrap'}>
+                            {el.caption}
+                        </span>
+                        {el.id === -1 ? <></> : <span className="d-flex text-darkened text-small"><span>Wstawiono: </span><span>{created_at}</span></span>}
+                    </div>
                 </div>
                 <div className="d-flex justify-content-end align-items-center gap-3 w-100">
-                    {context.user_id === el.user_id ? <>
-                        <img src={DELETE_ICON_IMAGE} className="small-icon" onClick={handleDelete} title="Usuń"/>
-                    </> : <></>}
                     {el.id === -1 ? <></> : <>
                         <a href={`${window.location.origin}/api/uploaded_files/download/${el.id}`} onClick={updateDownloadCount} title="Pobierz">
-                            <img src={DOWNLOAD_ICON_IMAGE} className="small-icon" />
+                            <img src={DOWNLOAD_ICON_IMAGE} className="small-icon icon-clickable" />
                         </a>
-                        <span className="text-sm">Wrzucono: {created_at}</span>
                     </>}
+                    {context.user_id === el.user_id ? <>
+                        <a onClick={handleDelete} title="Usuń">
+                            <img src={DELETE_ICON_IMAGE} className="small-icon icon-clickable" />
+                        </a>
+                    </> : <></>}
                 </div>
             </div>
             { expanded ? <>
-                    { el.mime_type.includes('image') ? 
+                    { el.mime_type.includes('image') ? <>
                         <img src={`${window.location.origin}/api/uploaded_files/${el.id}`} className="file-preview" onLoadStart={()=>{preview_loader.current.hidden = false}} 
                                                                                                                     onLoad={()=>{preview_loader.current.hidden = true}}/>
+                        <span className="loader-small" ref={preview_loader} />
+                        </>
                     : <></> }
                     { el.mime_type.includes('video') ? 
-                        <video className="file-preview" controls onLoadStart={()=>{preview_loader.current.hidden = false}} onLoadedData={()=>{preview_loader.current.hidden = true}}>
+                        <video className="file-preview" controls>
                             <source src={`${window.location.origin}/api/uploaded_files/${el.id}`} type={el.mime_type}/>
                         </video>
                     : <></> }
-                    <span className="loader-small" ref={preview_loader} />
+                    <span className="w-100 text-end text-darkened text-nowrap">Pobrania: {el.downloads_count}</span>
                 </> 
             : <></> }
         </div>

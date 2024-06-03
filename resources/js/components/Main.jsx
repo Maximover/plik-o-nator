@@ -1,12 +1,10 @@
 import React, { createContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import axios from 'axios';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import NavigationBar from './elements/NavigationBar';
 import Identity from './pages/Identity';
 import Files from './pages/Files';
 import ProtectedRoute from './util/ProtectedRoute';
-import Downloads from './pages/Downloads';
 import Alert from './elements/Alert';
 import { Toast } from 'bootstrap';
 import Users from './pages/Users';
@@ -36,7 +34,6 @@ function Main() {
                     <Route path="/" element={<NavigationBar />}>
                         <Route path="/" element={<Identity/>} />
                         <Route path="/files" element={<ProtectedRoute><Files/></ProtectedRoute>} />
-                        <Route path="/downloads" element={<ProtectedRoute><Downloads/></ProtectedRoute>} />
                         <Route path="/users" element={<ProtectedRoute><Users/></ProtectedRoute>} />
                     </Route>
                 </Routes>

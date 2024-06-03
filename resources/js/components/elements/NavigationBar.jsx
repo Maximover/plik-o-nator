@@ -45,9 +45,6 @@ const NavigationBar = () => {
                         <li className='nav-item'>
                             <Link className={'nav-link '+nav_state} to="/files">Pliki</Link>
                         </li>
-                        <li className='nav-item'>
-                            <Link className={'nav-link '+nav_state} to="/downloads">Pobrane</Link>
-                        </li>
                         {context.role === 'administrator' ? <li className='nav-item'>
                             <Link className={'nav-link '+nav_state} to="/users">Użytkownicy</Link>
                         </li> : <></>}
